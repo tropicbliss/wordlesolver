@@ -6,5 +6,5 @@ This project uses a similar algorithm that 3blue1brown uses.
 
 ## Credits
 
-- Some of the backend code is taken from [Roget](https://github.com/jonhoo/roget).
+- Some of the backend code is taken from [Roget](https://github.com/jonhoo/roget)
 - Some of the code for the grid design is taken from [Reactle](https://github.com/cwackerfuss/react-wordle)

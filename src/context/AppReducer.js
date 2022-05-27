@@ -1,4 +1,4 @@
-export default (state, action) => {
+const AppReducer = (state, action) => {
   switch (action.type) {
     case "PAGE_CHANGE":
       return { ...state, stage: action.payload };
@@ -6,3 +6,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default AppReducer;
