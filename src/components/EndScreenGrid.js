@@ -15,7 +15,7 @@ const EndScreenGrid = ({ finalWord }) => {
         setCurrentSelection={() => {}}
         hasPointer={false}
       />
-      <Confetti width={width} height={height} />
+      <Confetti width={width} height={height} recycle={false} />
     </div>
   );
 };
