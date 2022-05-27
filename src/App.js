@@ -105,13 +105,7 @@ function App() {
       return;
     }
     if (state.length === 14) {
-      toast.update(id, {
-        render: "Unfortunately, only a maximum of 14 guesses are allowed",
-        type: "error",
-        isLoading: false,
-        autoClose: 5000,
-        closeOnClick: true,
-      });
+      toast.warn("Only a maximum of 14 guesses are allowed");
       setLoading(false);
       return;
     }
