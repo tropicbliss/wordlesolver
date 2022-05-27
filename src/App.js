@@ -7,7 +7,7 @@ import BottomNavigation from "./components/navigation/BottomNavigation";
 import BlockedWords from "./components/blockedwords/BlockedWords";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import EndScreenGrid from "./EndScreenGrid";
+import EndScreenGrid from "./components/EndScreenGrid";
 
 function App() {
   const [theme, setTheme] = useState(

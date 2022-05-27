@@ -1,7 +1,7 @@
 import React from "react";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
-import WordPad from "./components/editor/WordPad";
+import WordPad from "./editor/WordPad";
 
 const EndScreenGrid = ({ finalWord }) => {
   const { width, height } = useWindowSize();
