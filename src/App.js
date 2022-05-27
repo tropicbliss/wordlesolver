@@ -80,7 +80,7 @@ function App() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw Error(`An error occurred (${response.status})`);
+          throw Error(`An error occurred: HTTP ${response.status}`);
         }
         return response;
       })
