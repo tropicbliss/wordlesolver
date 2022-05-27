@@ -6,7 +6,7 @@ This project uses a similar algorithm that 3blue1brown uses.
 
 ## Why must the starting word be "tares"?
 
-Unfortunately to minimise the load placed on the backend server, starting with the word 'tares' is imperative. Maybe in the future when I manage to integrate WASM into this project will I remove this restriction.
+Unfortunately to minimise the load placed on the backend server, starting with the word "tares" is imperative. Maybe in the future when I manage to integrate WASM into this project will I remove this restriction.
 
 ## Credits
 
