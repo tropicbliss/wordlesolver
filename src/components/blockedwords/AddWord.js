@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 
 const AddWord = ({ onAdd, blockedWords, word, setWord }) => {
