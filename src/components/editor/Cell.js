@@ -49,7 +49,7 @@ const Cell = ({
         <>
           <ReactTooltip type={theme} />
           <FcInfo
-            data-tip="The starting word must be 'tares'. Click the GitHub link on the top-right for more info."
+            data-tip="The starting word must be 'tares'."
             className="text-2xl absolute -right-3 -top-3"
           />
         </>
