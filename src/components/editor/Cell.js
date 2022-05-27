@@ -11,6 +11,7 @@ const Cell = ({
   onClick,
   hasInfo,
   hasPointer,
+  theme,
 }) => {
   const { stage } = useContext(GlobalContext);
   const classes = classnames(
@@ -46,9 +47,9 @@ const Cell = ({
       <div>{letter.toUpperCase()}</div>
       {stage === "firstPage" && hasInfo && (
         <>
-          <ReactTooltip effect="solid" />
+          <ReactTooltip type={theme} />
           <FcInfo
-            data-tip="Unfortunately to minimise the load placed on the backend server, starting with the word 'tares' is imperative."
+            data-tip="The starting word must be 'tares'. Click the GitHub link on the top-right for more info."
             className="text-2xl absolute -right-3 -top-3"
           />
         </>
