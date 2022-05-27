@@ -139,6 +139,7 @@ function App() {
     setCorrectness([null, null, null, null, null]);
     setCurrentSelection(0);
     if (stage === "firstPage") {
+      setWord("");
       changePageTo("midPages");
     }
     if (res.count === 1) {
