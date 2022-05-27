@@ -115,6 +115,8 @@ function App() {
         render: e.toString(),
         type: "error",
         isLoading: false,
+        autoClose: 5000,
+        closeOnClick: true,
       });
       setLoading(false);
       return;
