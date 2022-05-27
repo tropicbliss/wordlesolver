@@ -8,6 +8,7 @@ const Editor = ({
   word,
   currentSelection,
   setCurrentSelection,
+  theme,
 }) => {
   function correctnessPickerClicked(c) {
     let newCorrectness = JSON.parse(JSON.stringify(correctness)); // deep copy
@@ -25,6 +26,7 @@ const Editor = ({
           word={word}
           correctness={correctness}
           hasPointer={true}
+          theme={theme}
         />
         <CorrectnessPicker onClick={correctnessPickerClicked} />
       </div>
