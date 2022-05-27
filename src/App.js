@@ -104,6 +104,17 @@ function App() {
       );
       return;
     }
+    if (state.length === 14) {
+      toast.update(id, {
+        render: "Unfortunately, only a maximum of 14 guesses are allowed",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+        closeOnClick: true,
+      });
+      setLoading(false);
+      return;
+    }
     const id = toast.loading("Processing...");
     setLoading(true);
     const currentPayloadUnit = result + ":" + correctness.join("");
@@ -206,6 +217,7 @@ function App() {
           word={result}
           currentSelection={currentSelection}
           setCurrentSelection={setCurrentSelection}
+          theme={theme}
         />
       )}
       {stage !== "endPage" && (
