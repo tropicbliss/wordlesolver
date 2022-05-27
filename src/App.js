@@ -85,7 +85,7 @@ function App() {
         return response;
       })
       .catch((error) => {
-        throw Error(`An error occurred: ${error}`);
+        throw Error(error);
       });
     const data = await res.json();
     return data;
@@ -112,7 +112,11 @@ function App() {
     try {
       res = await executeRequest(currentPayload);
     } catch (e) {
-      toast.update(id, { render: e, type: "error", isLoading: false });
+      toast.update(id, {
+        render: e.toString(),
+        type: "error",
+        isLoading: false,
+      });
       setLoading(false);
       return;
     }
