@@ -4,7 +4,11 @@ This is my first frontend project created using React/Tailwind with a backend wr
 
 This project uses a similar algorithm that 3blue1brown uses.
 
+## Why is the default starting word "tares"?
+
+Unfortunately to minimise the load placed on the backend server, starting with the word 'tares' is imperative. Maybe in the future when I implement a WASM Wordle solver will I remove this restriction.
+
 ## Credits
 
-- Some of the backend code is taken from [Roget](https://github.com/jonhoo/roget)
-- Some of the code for the grid design is taken from [Reactle](https://github.com/cwackerfuss/react-wordle)
+- Some of the backend code is taken from [Roget](https://github.com/jonhoo/roget).
+- Some of the code for the grid design is taken from [Reactle](https://github.com/cwackerfuss/react-wordle).
