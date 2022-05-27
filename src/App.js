@@ -48,17 +48,11 @@ function App() {
     null,
     null,
   ]);
-
   const [blockedWords, setBlockedWords] = useState([]);
-
   const [result, setResult] = useState("tares");
-
   const [state, setState] = useState([]);
-
   const { stage, changePageTo } = useContext(GlobalContext);
-
   const [currentSelection, setCurrentSelection] = useState(0);
-
   const [loading, setLoading] = useState(false);
 
   const executeRequest = async (payload) => {
