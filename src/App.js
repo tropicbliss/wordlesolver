@@ -54,6 +54,7 @@ function App() {
   const { stage, changePageTo } = useContext(GlobalContext);
   const [currentSelection, setCurrentSelection] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [word, setWord] = useState("");
 
   const executeRequest = async (payload) => {
     if (correctness.filter((c) => c === "correct").length === 5) {
@@ -221,6 +222,8 @@ function App() {
         <BlockedWords
           blockedWords={blockedWords}
           setBlockedWords={setBlockedWords}
+          word={word}
+          setWord={setWord}
         />
       )}
       {stage === "endPage" && <EndScreenGrid finalWord={result} />}

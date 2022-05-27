@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const AddWord = ({ onAdd, blockedWords }) => {
-  const [word, setWord] = useState("");
+const AddWord = ({ onAdd, blockedWords, word, setWord }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const lowercaseWord = word.toLowerCase();

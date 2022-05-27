@@ -2,10 +2,11 @@ import React from "react";
 import AddWord from "./AddWord";
 import Words from "./Words";
 
-const BlockedWords = ({ blockedWords, setBlockedWords }) => {
+const BlockedWords = ({ blockedWords, setBlockedWords, word, setWord }) => {
   const addWord = (word) => {
     setBlockedWords([...blockedWords, word]);
   };
+
   const removeWord = (word) =>
     setBlockedWords(blockedWords.filter((w) => w !== word));
 
@@ -14,7 +15,12 @@ const BlockedWords = ({ blockedWords, setBlockedWords }) => {
       <div className="px-6 py-3 mt-3 text-white rounded-t-2xl items-center bg-red-500">
         <header className="text-xl font-bold md:text-2xl">Blocked Words</header>
       </div>
-      <AddWord onAdd={addWord} blockedWords={blockedWords} />
+      <AddWord
+        onAdd={addWord}
+        blockedWords={blockedWords}
+        word={word}
+        setWord={setWord}
+      />
       {blockedWords.length > 0 ? (
         <Words words={blockedWords} onDelete={removeWord} />
       ) : (
