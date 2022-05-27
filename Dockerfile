@@ -5,4 +5,4 @@ RUN npm install
 COPY . .
 USER node
 EXPOSE 3000
-CMD ["npm", "build"]
+RUN npm run build
