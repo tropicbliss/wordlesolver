@@ -75,7 +75,19 @@ function App() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw Error(`An error occurred: HTTP ${response.status}`);
+          const status = response.status;
+          let e;
+          switch (status) {
+            case 500:
+              e = "Internal server error";
+            case 408:
+              e = "Request timed out";
+            case 503:
+              e = "Service is overloaded, try again later";
+            default:
+              e = `HTTP ${status}`;
+          }
+          throw Error(`An error occurred: ${e}`);
         }
         return response;
       })
