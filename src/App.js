@@ -80,10 +80,13 @@ function App() {
           switch (status) {
             case 500:
               e = "Internal server error";
+              break;
             case 408:
               e = "Request timed out";
+              break;
             case 503:
               e = "Service is overloaded, try again later";
+              break;
             default:
               e = `HTTP ${status}`;
           }
