@@ -7,15 +7,13 @@ import BottomNavigation from "./components/navigation/BottomNavigation";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EndScreenGrid from "./components/EndScreenGrid";
-import init, { compute } from "wasm-lib";
 
 function App() {
-  const [wasmLoaded, setWasmLoaded] = useState(false);
+  const [worker, setWorker] = useState(null);
 
   useEffect(() => {
-    init().then(() => {
-      setWasmLoaded(true);
-    });
+    const worker = new Worker(new URL("./workers/solver.js", import.meta.url));
+    setWorker(worker);
   }, []);
 
   const [theme, setTheme] = useState(
@@ -63,14 +61,12 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   const next = async () => {
-    if (correctness.filter((c) => c === "correct").length === 5) {
-      changePageTo("endPage");
+    if (!worker) {
+      toast.warn("The web worker has not started yet, please try again later");
       return;
     }
-    if (!wasmLoaded) {
-      toast.warn(
-        "WASM module not finished loading. Please wait for a while then try again"
-      );
+    if (correctness.filter((c) => c === "correct").length === 5) {
+      changePageTo("endPage");
       return;
     }
     if (correctness.filter((c) => c === 3).length === 5) {
@@ -93,44 +89,50 @@ function App() {
     setLoading(true);
     const currentPayloadUnit = result + ":" + correctness.join("");
     const currentPayload = [...state, currentPayloadUnit].join(",");
-    const data = compute(currentPayload, isHardMode);
-    if (data === null) {
-      toast.update(id, {
-        render: "Unable to find any words",
-        type: "error",
-        isLoading: false,
-        autoClose: 5000,
-        closeOnClick: true,
-      });
-      setLoading(false);
+    worker.postMessage({
+      state: currentPayload,
+      isHardMode,
+    });
+    worker.onmessage = (e) => {
+      const data = e.data;
+      if (data === null) {
+        toast.update(id, {
+          render: "Unable to find any words",
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+        setLoading(false);
+        setCurrentSelection(0);
+        return;
+      }
+      setResult(data.guess);
+      setState([...state, currentPayloadUnit]);
+      setCorrectness([null, null, null, null, null]);
       setCurrentSelection(0);
-      return;
-    }
-    setResult(data.guess);
-    setState([...state, currentPayloadUnit]);
-    setCorrectness([null, null, null, null, null]);
-    setCurrentSelection(0);
-    if (stage === "firstPage") {
-      changePageTo("midPages");
-    }
-    if (data.count === 1) {
-      toast.update(id, {
-        render: "You should get this on your next one",
-        type: "success",
-        isLoading: false,
-        autoClose: 5000,
-        closeOnClick: true,
-      });
-    } else {
-      toast.update(id, {
-        render: `${data.count} words left`,
-        type: "success",
-        isLoading: false,
-        autoClose: 5000,
-        closeOnClick: true,
-      });
-    }
-    setLoading(false);
+      if (stage === "firstPage") {
+        changePageTo("midPages");
+      }
+      if (data.count === 1) {
+        toast.update(id, {
+          render: "You should get this on your next one",
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+      } else {
+        toast.update(id, {
+          render: `${data.count} words left`,
+          type: "success",
+          isLoading: false,
+          autoClose: 5000,
+          closeOnClick: true,
+        });
+      }
+      setLoading(false);
+    };
   };
 
   const previous = () => {
