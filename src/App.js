@@ -11,9 +11,11 @@ import EndScreenGrid from "./components/EndScreenGrid";
 import init, { compute } from "wasm-lib";
 
 function App() {
+  const [wasmLoaded, setWasmLoaded] = useState(false);
+
   useEffect(() => {
     init().then(() => {
-      console.log(compute());
+      setWasmLoaded(true);
     });
   });
 
