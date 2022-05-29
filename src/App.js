@@ -57,7 +57,6 @@ function App() {
     null,
     null,
   ]);
-  const [blockedWords, setBlockedWords] = useState([]);
   const [result, setResult] = useState("tares");
   const [state, setState] = useState([]);
   const { stage, changePageTo } = useContext(GlobalContext);
@@ -78,7 +77,6 @@ function App() {
       },
       body: JSON.stringify({
         state: payload,
-        blocked: blockedWords,
         hardMode: isHardMode,
       }),
     })
@@ -242,14 +240,6 @@ function App() {
           correctness={correctness}
           next={next}
           isLoading={loading}
-        />
-      )}
-      {stage === "firstPage" && (
-        <BlockedWords
-          blockedWords={blockedWords}
-          setBlockedWords={setBlockedWords}
-          word={word}
-          setWord={setWord}
         />
       )}
       {stage === "endPage" && <EndScreenGrid finalWord={result} />}
