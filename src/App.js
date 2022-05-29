@@ -16,7 +16,7 @@ function App() {
     init().then(() => {
       setWasmLoaded(true);
     });
-  });
+  }, [wasmLoaded]);
 
   const [theme, setTheme] = useState(
     localStorage.theme === "dark" ||
@@ -39,11 +39,11 @@ function App() {
     theme === "dark"
       ? document.documentElement.classList.add("dark")
       : document.documentElement.classList.remove("dark");
-  });
+  }, [theme]);
 
   useEffect(() => {
     localStorage.isHardMode = isHardMode;
-  });
+  }, [isHardMode]);
 
   const toggleTheme = () => {
     theme === "dark" ? setTheme("light") : setTheme("dark");
