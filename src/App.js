@@ -4,7 +4,6 @@ import { GlobalContext } from "./context/GlobalState";
 import HardModeSwitch from "./components/hardmode/HardModeSwitch";
 import Editor from "./components/editor/Editor";
 import BottomNavigation from "./components/navigation/BottomNavigation";
-import BlockedWords from "./components/blockedwords/BlockedWords";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EndScreenGrid from "./components/EndScreenGrid";
@@ -109,6 +108,12 @@ function App() {
   };
 
   const next = async () => {
+    if (!wasmLoaded) {
+      toast.warn(
+        "WASM module not finished loading. Please wait for a while then try again"
+      );
+      return;
+    }
     if (correctness.filter((c) => c === 3).length === 5) {
       changePageTo("endPage");
       toast.success(
@@ -123,7 +128,6 @@ function App() {
     }
     if (state.length === 14) {
       toast.warn("Only a maximum of 14 guesses are allowed");
-      setLoading(false);
       return;
     }
     const id = toast.loading("Processing...");
