@@ -61,53 +61,12 @@ function App() {
   const { stage, changePageTo } = useContext(GlobalContext);
   const [currentSelection, setCurrentSelection] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [word, setWord] = useState("");
 
-  const executeRequest = async (payload) => {
+  const next = async () => {
     if (correctness.filter((c) => c === "correct").length === 5) {
       changePageTo("endPage");
       return;
     }
-    const res = await fetch("https://retrun.tropicbliss.net/", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        state: payload,
-        hardMode: isHardMode,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          const status = response.status;
-          let e;
-          switch (status) {
-            case 500:
-              e = "Internal server error";
-              break;
-            case 408:
-              e = "Request timed out";
-              break;
-            case 503:
-              e = "Service is overloaded, try again later";
-              break;
-            default:
-              e = `HTTP ${status}`;
-          }
-          throw Error(`An error occurred: ${e}`);
-        }
-        return response;
-      })
-      .catch((error) => {
-        throw Error(error);
-      });
-    const data = await res.json();
-    return data;
-  };
-
-  const next = async () => {
     if (!wasmLoaded) {
       toast.warn(
         "WASM module not finished loading. Please wait for a while then try again"
@@ -134,21 +93,8 @@ function App() {
     setLoading(true);
     const currentPayloadUnit = result + ":" + correctness.join("");
     const currentPayload = [...state, currentPayloadUnit].join(",");
-    let res = null;
-    try {
-      res = await executeRequest(currentPayload);
-    } catch (e) {
-      toast.update(id, {
-        render: e.toString(),
-        type: "error",
-        isLoading: false,
-        autoClose: 5000,
-        closeOnClick: true,
-      });
-      setLoading(false);
-      return;
-    }
-    if (res === null) {
+    const data = compute(currentPayload, isHardMode);
+    if (data === null) {
       toast.update(id, {
         render: "Unable to find any words",
         type: "error",
@@ -160,15 +106,14 @@ function App() {
       setCurrentSelection(0);
       return;
     }
-    setResult(res.guess);
+    setResult(data.guess);
     setState([...state, currentPayloadUnit]);
     setCorrectness([null, null, null, null, null]);
     setCurrentSelection(0);
     if (stage === "firstPage") {
-      setWord("");
       changePageTo("midPages");
     }
-    if (res.count === 1) {
+    if (data.count === 1) {
       toast.update(id, {
         render: "You should get this on your next one",
         type: "success",
@@ -178,7 +123,7 @@ function App() {
       });
     } else {
       toast.update(id, {
-        render: `${res.count} words left`,
+        render: `${data.count} words left`,
         type: "success",
         isLoading: false,
         autoClose: 5000,

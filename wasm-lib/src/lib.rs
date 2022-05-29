@@ -14,9 +14,9 @@ struct Result {
 pub fn compute(state: &str, hard_mode: bool) -> JsValue {
     let history = helper::get_guesses(state);
     let data = algorithm::Algorithm::guess(&history, !hard_mode);
-    let result = Result {
-        guess: data.guess,
-        count: data.count,
-    };
+    let result = data.map(|r| Result {
+        guess: r.guess,
+        count: r.count,
+    });
     JsValue::from_serde(&result).unwrap()
 }

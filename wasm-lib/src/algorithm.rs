@@ -26,12 +26,12 @@ pub struct Algorithm {
 
 impl Algorithm {
     #[must_use]
-    pub fn guess(history: &[Guess], easy_mode: bool) -> Self {
+    pub fn guess(history: &[Guess], easy_mode: bool) -> Option<Self> {
         if history.is_empty() {
-            return Self {
+            return Some(Self {
                 guess: "tares",
                 count: WORDS.into_iter().filter(|(_, (_, easy))| *easy).count(),
-            };
+            });
         }
         let sum: f64 = WORDS.into_iter().map(|(_, (count, _))| *count as f64).sum();
         let consider: Vec<_> = if easy_mode {
@@ -62,13 +62,13 @@ impl Algorithm {
             .filter(|(word, _)| WORDS.get(word).unwrap().1)
             .count();
         if actual_remaining_len == 0 {
-            panic!("unable to find any words");
+            return None;
         }
         if actual_remaining_len == 1 {
-            return Self {
+            return Some(Self {
                 guess: remaining.first().unwrap().0,
                 count: actual_remaining_len,
-            };
+            });
         }
         let score = history.len() as f64;
         let remaining_p: f64 = remaining.iter().map(|(_, p)| p).sum();
@@ -120,9 +120,9 @@ impl Algorithm {
                 }
             }
         }
-        Self {
-            guess: best.expect("unable to find any words").word,
+        Some(Self {
+            guess: best?.word,
             count: actual_remaining_len,
-        }
+        })
     }
 }
