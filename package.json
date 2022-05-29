@@ -18,10 +18,12 @@
     "react-toastify": "^9.0.1",
     "react-tooltip": "^4.2.21",
     "react-use": "^17.4.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "wasm-lib": "file:wasm-lib/pkg"
   },
   "scripts": {
     "start": "react-scripts start",
+    "build:wasm": "cd wasm-lib && wasm-pack build --target web --out-dir pkg",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,0 +1,17 @@
+[package]
+name = "wasm-lib"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+phf = { version = "0.10.1", features = ["macros"] }
+serde = { version = "1.0.137", features = ["derive"] }
+wasm-bindgen = { version = "0.2.80", features = ["serde-serialize"] }
+
+[build-dependencies]
+phf_codegen = "0.10.0"

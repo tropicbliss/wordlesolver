@@ -8,8 +8,15 @@ import BlockedWords from "./components/blockedwords/BlockedWords";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EndScreenGrid from "./components/EndScreenGrid";
+import init, { compute } from "wasm-lib";
 
 function App() {
+  useEffect(() => {
+    init().then(() => {
+      console.log(compute());
+    });
+  });
+
   const [theme, setTheme] = useState(
     localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
