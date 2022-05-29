@@ -1,8 +1,13 @@
 mod algorithm;
 mod helper;
+mod utils;
 
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
+
+#[cfg(feature = "wee_alloc")]
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[derive(Serialize, Deserialize)]
 struct Result {

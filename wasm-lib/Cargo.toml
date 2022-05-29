@@ -6,12 +6,20 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook"]
 
 [dependencies]
+console_error_panic_hook = { version = "0.1.7", optional = true }
 phf = { version = "0.10.1", features = ["macros"] }
 serde = { version = "1.0.137", features = ["derive"] }
 wasm-bindgen = { version = "0.2.80", features = ["serde-serialize"] }
+wee_alloc = { version = "0.4.5", optional = true }
 
 [build-dependencies]
 phf_codegen = "0.10.0"
+
+[profile.release]
+opt-level = "s"
