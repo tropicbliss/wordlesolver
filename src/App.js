@@ -16,7 +16,7 @@ function App() {
     init().then(() => {
       setWasmLoaded(true);
     });
-  }, [wasmLoaded]);
+  }, []);
 
   const [theme, setTheme] = useState(
     localStorage.theme === "dark" ||
