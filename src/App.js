@@ -148,7 +148,17 @@ function App() {
   };
 
   const home = () => {
-    setResult("");
+    setResult("tares");
+    if (stage === "endPage") {
+      setCorrectness([null, null, null, null, null]);
+    } else {
+      setCorrectness(
+        state[0]
+          .split(":")[1]
+          .split("")
+          .map((e) => +e)
+      );
+    }
     setCorrectness([null, null, null, null, null]);
     setState([]);
     setCurrentSelection(0);
@@ -176,9 +186,26 @@ function App() {
     setResult(result.slice(0, -1));
   };
 
+  const previous = () => {
+    const previousUnit = state.pop();
+    const previousResult = previousUnit.split(":");
+    setResult(previousResult[0]);
+    setState(state);
+    setCurrentSelection(0);
+    setCorrectness(previousResult[1].split("").map((e) => +e));
+    if (state.length === 0) {
+      changePageTo("firstPage");
+    }
+  };
+
   return (
     <>
-      <Header onToggleDarkMode={toggleTheme} theme={theme} home={home} />
+      <Header
+        onToggleDarkMode={toggleTheme}
+        theme={theme}
+        home={home}
+        previous={previous}
+      />
       {stage === "firstPage" && (
         <HardModeSwitch toggleHardMode={toggleHardMode} hardMode={isHardMode} />
       )}

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { FaHome, FaGithub, FaSun, FaMoon } from "react-icons/fa";
+import { FaHome, FaGithub, FaSun, FaMoon, FaArrowLeft } from "react-icons/fa";
 import { GiBrain } from "react-icons/gi";
 import { GlobalContext } from "../context/GlobalState";
 
-const Header = ({ onToggleDarkMode, theme, home }) => {
+const Header = ({ onToggleDarkMode, theme, home, previous }) => {
   const { stage } = useContext(GlobalContext);
 
   return (
@@ -15,7 +15,13 @@ const Header = ({ onToggleDarkMode, theme, home }) => {
       <div className="flex space-x-3 items-center text-2xl">
         <div className="flex space-x-3 items-center text-2xl">
           <button
-            className={stage !== "endPage" ? "hidden" : ""}
+            className={stage !== "midPages" ? "hidden" : ""}
+            onClick={() => previous()}
+          >
+            <FaArrowLeft />
+          </button>
+          <button
+            className={stage === "firstPage" ? "hidden" : ""}
             onClick={() => home()}
           >
             <FaHome />
