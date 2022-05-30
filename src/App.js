@@ -135,33 +135,17 @@ function App() {
     };
   };
 
-  const previous = () => {
-    const previousUnit = state.pop();
-    const previousResult = previousUnit.split(":");
-    setResult(previousResult[0]);
-    setState(state);
-    setCurrentSelection(0);
-    setCorrectness(previousResult[1].split("").map((e) => +e));
-    if (state.length === 0) {
-      changePageTo("firstPage");
-    }
-  };
-
   const home = () => {
     setResult("tares");
-    if (stage === "endPage") {
-      setCorrectness([null, null, null, null, null]);
-    } else {
-      setCorrectness(
-        state[0]
-          .split(":")[1]
-          .split("")
-          .map((e) => +e)
-      );
-    }
+    setCorrectness([null, null, null, null, null]);
     setState([]);
     setCurrentSelection(0);
     changePageTo("firstPage");
+  };
+
+  const completed = () => {
+    setCorrectness([3, 3, 3, 3, 3]);
+    setCurrentSelection(4);
   };
 
   return (
@@ -169,7 +153,6 @@ function App() {
       <Header
         onToggleDarkMode={toggleTheme}
         theme={theme}
-        previous={previous}
         home={home}
         isLoading={loading}
       />
@@ -191,6 +174,7 @@ function App() {
           correctness={correctness}
           next={next}
           isLoading={loading}
+          completed={completed}
         />
       )}
       {stage === "endPage" && <EndScreenGrid finalWord={result} />}
