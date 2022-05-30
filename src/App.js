@@ -148,10 +148,11 @@ function App() {
   };
 
   const home = () => {
-    setResult("tares");
     if (stage === "endPage") {
+      setResult("");
       setCorrectness([null, null, null, null, null]);
     } else {
+      setResult(state[0].split(":")[0]);
       setCorrectness(
         state[0]
           .split(":")[1]
@@ -159,7 +160,6 @@ function App() {
           .map((e) => +e)
       );
     }
-    setCorrectness([null, null, null, null, null]);
     setState([]);
     setCurrentSelection(0);
     changePageTo("firstPage");
