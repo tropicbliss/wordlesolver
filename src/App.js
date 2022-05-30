@@ -60,7 +60,7 @@ function App() {
   const [currentSelection, setCurrentSelection] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const next = async () => {
+  const next = () => {
     if (!worker) {
       toast.warn("The web worker has not started yet, please try again later");
       return;

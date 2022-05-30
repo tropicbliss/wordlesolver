@@ -15,7 +15,7 @@ const Header = ({ onToggleDarkMode, theme, home, isLoading }) => {
       <div className="flex space-x-3 items-center text-2xl">
         <div className="flex space-x-3 items-center text-2xl">
           <button
-            className={stage !== "endPage" && "hidden"}
+            className={stage !== "endPage" ? "hidden" : ""}
             onClick={() => home()}
             disabled={isLoading}
           >
