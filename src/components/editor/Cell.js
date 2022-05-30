@@ -49,7 +49,7 @@ const Cell = ({
         <>
           <ReactTooltip type={theme} />
           <FcInfo
-            data-tip="If it takes a long time to process, try starting with the word 'tares'"
+            data-tip="If this takes a long time to process, try starting with the word 'tares'"
             className="text-2xl absolute -right-3 -top-3"
           />
         </>
