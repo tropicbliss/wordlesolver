@@ -8,3 +8,23 @@ This project uses a similar algorithm that 3blue1brown uses.
 
 - Some of the WebAssembly code is taken from [Roget](https://github.com/jonhoo/roget).
 - Some of the code for the grid and keyboard design is taken from [Reactle](https://github.com/cwackerfuss/react-wordle).
+
+## Build
+
+1. Build WASM module (optional as this WASM module is already included in this repo). Take note that `wasm-pack`(https://github.com/rustwasm/wasm-pack) needs to be installed.
+
+```sh
+npm run build:wasm
+```
+
+2. Build React project.
+
+```sh
+npm run build
+```
+
+Alternatively, you can run this project on `localhost`.
+
+```sh
+npm run start
+```
