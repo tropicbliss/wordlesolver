@@ -205,6 +205,7 @@ function App() {
         theme={theme}
         home={home}
         previous={previous}
+        isLoading={loading}
       />
       {stage === "firstPage" && (
         <HardModeSwitch toggleHardMode={toggleHardMode} hardMode={isHardMode} />
