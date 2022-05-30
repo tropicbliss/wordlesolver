@@ -25,9 +25,8 @@ pub struct Algorithm {
 }
 
 impl Algorithm {
-    #[must_use]
-    pub fn guess(history: &[Guess], easy_mode: bool) -> Option<Self> {
-        if history.is_empty() {
+    pub fn guess(history: &[Guess], blocked: &[String], easy_mode: bool) -> Option<Self> {
+        if history.is_empty() && !blocked.contains(&"tares".to_string()) {
             return Some(Self {
                 guess: "tares",
                 count: WORDS.into_iter().filter(|(_, (_, easy))| *easy).count(),
@@ -38,13 +37,18 @@ impl Algorithm {
             WORDS
                 .into_iter()
                 .map(|(word, _)| word)
+                .filter(|word| !blocked.contains(&(**word).to_string()))
                 .map(|word| (word, sigmoid(WORDS.get(word).unwrap().0 as f64 / sum)))
                 .collect()
         } else {
             WORDS
                 .into_iter()
                 .map(|(word, _)| word)
-                .filter(|word| history.iter().all(|guess| guess.matches(word)))
+                .filter(|word| {
+                    history.iter().all(|guess| {
+                        guess.matches(word) && !blocked.contains(&(**word).to_string())
+                    })
+                })
                 .map(|word| (word, sigmoid(WORDS.get(word).unwrap().0 as f64 / sum)))
                 .collect()
         };

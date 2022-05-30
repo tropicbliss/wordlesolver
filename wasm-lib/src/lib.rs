@@ -16,9 +16,10 @@ struct Result {
 }
 
 #[wasm_bindgen]
-pub fn compute(state: &str, hard_mode: bool) -> JsValue {
+pub fn compute(state: &str, blocked: JsValue, hard_mode: bool) -> JsValue {
+    let blocked: Vec<String> = blocked.into_serde().unwrap();
     let history = helper::get_guesses(state);
-    let data = algorithm::Algorithm::guess(&history, !hard_mode);
+    let data = algorithm::Algorithm::guess(&history, &blocked, !hard_mode);
     let result = data.map(|r| Result {
         guess: r.guess,
         count: r.count,

@@ -7,6 +7,6 @@ onmessage = async (e) => {
     wasm = await init();
   }
   const data = e.data;
-  const result = compute(data.state, data.isHardMode);
+  const result = compute(data.state, data.blocked, data.isHardMode);
   postMessage(result);
 };

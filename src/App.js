@@ -7,9 +7,11 @@ import BottomNavigation from "./components/navigation/BottomNavigation";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EndScreenGrid from "./components/EndScreenGrid";
+import BlockedWords from "./components/blockedwords/BlockedWords";
 
 function App() {
   const [worker, setWorker] = useState(null);
+  const [blockedWords, setBlockedWords] = useState([]);
 
   useEffect(() => {
     const worker = new Worker(new URL("./workers/solver.js", import.meta.url));
@@ -46,6 +48,8 @@ function App() {
   const toggleTheme = () => {
     theme === "dark" ? setTheme("light") : setTheme("dark");
   };
+
+  const [word, setWord] = useState("");
 
   const [correctness, setCorrectness] = useState([
     null,
@@ -91,6 +95,7 @@ function App() {
     const currentPayload = [...state, currentPayloadUnit].join(",");
     worker.postMessage({
       state: currentPayload,
+      blocked: blockedWords,
       isHardMode,
     });
     worker.onmessage = (e) => {
@@ -175,6 +180,14 @@ function App() {
           next={next}
           isLoading={loading}
           completed={completed}
+        />
+      )}
+      {stage === "midPages" && (
+        <BlockedWords
+          blockedWords={blockedWords}
+          setBlockedWords={setBlockedWords}
+          word={word}
+          setWord={setWord}
         />
       )}
       {stage === "endPage" && <EndScreenGrid finalWord={result} />}
