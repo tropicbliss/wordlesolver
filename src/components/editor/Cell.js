@@ -44,12 +44,12 @@ const Cell = ({
 
   return (
     <div className={classes} onClick={() => onClick()}>
-      <div>{letter.toUpperCase()}</div>
+      <div>{letter === undefined ? "" : letter.toUpperCase()}</div>
       {stage === "firstPage" && hasInfo && (
         <>
           <ReactTooltip type={theme} />
           <FcInfo
-            data-tip="The starting word must be 'tares'."
+            data-tip="If it takes a long time to process, try starting with the word 'tares'"
             className="text-2xl absolute -right-3 -top-3"
           />
         </>

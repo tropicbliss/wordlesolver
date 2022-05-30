@@ -1,19 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import RoundedButton from "./RoundedButton";
 
-const BottomNavigation = ({ correctness, next, isLoading, completed }) => {
-  const [shake, setShake] = useState(false);
-
-  const animate = () => {
-    setShake(true);
-    setTimeout(() => setShake(false), 250);
-  };
-
-  const onClick = () => {
-    const isAllFilled = !correctness.includes(null);
-    isAllFilled ? next() : animate();
-  };
-
+const BottomNavigation = ({ next, isLoading, completed, isJiggle }) => {
   return (
     <div className="flex justify-end pr-6 py-3 items-end space-x-3">
       <RoundedButton
@@ -24,8 +12,8 @@ const BottomNavigation = ({ correctness, next, isLoading, completed }) => {
       />
       <RoundedButton
         text="Next"
-        onClick={onClick}
-        isShake={shake}
+        onClick={next}
+        isShake={isJiggle}
         disabled={isLoading}
       />
     </div>

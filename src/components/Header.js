@@ -3,7 +3,7 @@ import { FaHome, FaGithub, FaSun, FaMoon } from "react-icons/fa";
 import { GiBrain } from "react-icons/gi";
 import { GlobalContext } from "../context/GlobalState";
 
-const Header = ({ onToggleDarkMode, theme, home, isLoading }) => {
+const Header = ({ onToggleDarkMode, theme, home }) => {
   const { stage } = useContext(GlobalContext);
 
   return (
@@ -17,7 +17,6 @@ const Header = ({ onToggleDarkMode, theme, home, isLoading }) => {
           <button
             className={stage !== "endPage" ? "hidden" : ""}
             onClick={() => home()}
-            disabled={isLoading}
           >
             <FaHome />
           </button>

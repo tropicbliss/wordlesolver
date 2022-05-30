@@ -8,6 +8,7 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EndScreenGrid from "./components/EndScreenGrid";
 import BlockedWords from "./components/blockedwords/BlockedWords";
+import { Keyboard } from "./components/editor/Keyboard";
 
 function App() {
   const [worker, setWorker] = useState(null);
@@ -58,13 +59,19 @@ function App() {
     null,
     null,
   ]);
-  const [result, setResult] = useState("tares");
+  const [result, setResult] = useState("");
   const [state, setState] = useState([]);
   const { stage, changePageTo } = useContext(GlobalContext);
   const [currentSelection, setCurrentSelection] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const next = () => {
+    const isValid = !correctness.includes(null) && result.length === 5;
+    if (!isValid) {
+      setNextJiggle(true);
+      setTimeout(() => setNextJiggle(false), 250);
+      return;
+    }
     if (!worker) {
       toast.warn("The web worker has not started yet, please try again later");
       return;
@@ -141,7 +148,7 @@ function App() {
   };
 
   const home = () => {
-    setResult("tares");
+    setResult("");
     setCorrectness([null, null, null, null, null]);
     setState([]);
     setCurrentSelection(0);
@@ -153,14 +160,25 @@ function App() {
     setCurrentSelection(4);
   };
 
+  const [isNextJiggle, setNextJiggle] = useState(false);
+
+  const onChar = (key) => {
+    if (result.length < 5) {
+      setResult(result + key.toLowerCase());
+    }
+  };
+
+  const onEnter = () => {
+    next();
+  };
+
+  const onDelete = () => {
+    setResult(result.slice(0, -1));
+  };
+
   return (
     <>
-      <Header
-        onToggleDarkMode={toggleTheme}
-        theme={theme}
-        home={home}
-        isLoading={loading}
-      />
+      <Header onToggleDarkMode={toggleTheme} theme={theme} home={home} />
       {stage === "firstPage" && (
         <HardModeSwitch toggleHardMode={toggleHardMode} hardMode={isHardMode} />
       )}
@@ -176,11 +194,14 @@ function App() {
       )}
       {stage !== "endPage" && (
         <BottomNavigation
-          correctness={correctness}
           next={next}
           isLoading={loading}
           completed={completed}
+          isJiggle={isNextJiggle}
         />
+      )}
+      {stage === "firstPage" && (
+        <Keyboard onChar={onChar} onEnter={onEnter} onDelete={onDelete} />
       )}
       {stage === "midPages" && (
         <BlockedWords
