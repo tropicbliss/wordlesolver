@@ -11,7 +11,7 @@ This project uses a similar algorithm that 3blue1brown uses.
 
 ## Build
 
-1. Build WASM module (optional as this WASM module is already included in this repo). Take note that `wasm-pack`(https://github.com/rustwasm/wasm-pack) needs to be installed.
+1. Build WASM module (optional as this WASM module is already included in this repo). Take note that [`wasm-pack`](https://github.com/rustwasm/wasm-pack) needs to be installed.
 
 ```sh
 npm run build:wasm
