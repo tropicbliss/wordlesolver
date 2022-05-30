@@ -32,7 +32,7 @@ export const Keyboard = ({ onChar, onDelete, onEnter }) => {
   }, [onEnter, onDelete, onChar]);
 
   return (
-    <div className="mx-3">
+    <div className="mx-3 py-3">
       <div className="flex justify-center mb-1">
         {["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"].map((key) => (
           <Key value={key} key={key} onClick={onClick} />
