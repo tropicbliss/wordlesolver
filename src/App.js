@@ -112,8 +112,6 @@ function App() {
           render: "Unable to find any words",
           type: "error",
           isLoading: false,
-          autoClose: 5000,
-          closeOnClick: true,
         });
         setLoading(false);
         setCurrentSelection(0);
@@ -131,16 +129,12 @@ function App() {
           render: "You should get this on your next one",
           type: "success",
           isLoading: false,
-          autoClose: 5000,
-          closeOnClick: true,
         });
       } else {
         toast.update(id, {
           render: `${data.count} words left`,
           type: "success",
           isLoading: false,
-          autoClose: 5000,
-          closeOnClick: true,
         });
       }
       setLoading(false);
@@ -240,7 +234,13 @@ function App() {
         />
       )}
       {stage === "endPage" && <EndScreenGrid finalWord={result} />}
-      <ToastContainer theme={theme} hideProgressBar transition={Slide} />
+      <ToastContainer
+        theme={theme}
+        hideProgressBar
+        transition={Slide}
+        autoClose={5000}
+        closeOnClick={true}
+      />
     </>
   );
 }
