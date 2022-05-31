@@ -8,7 +8,7 @@ const EndScreenGrid = ({ finalWord, state }) => {
   const { width, height } = useWindowSize();
 
   return (
-    <div className="my-3">
+    <div className="my-6">
       <History state={state} />
       <WordPad
         word={finalWord}

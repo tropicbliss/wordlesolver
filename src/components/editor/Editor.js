@@ -20,7 +20,7 @@ const Editor = ({
   }
 
   return (
-    <div className="my-3">
+    <div className="my-6">
       <History state={state} />
       <div className="flex flex-col space-y-3 items-center">
         <WordPad

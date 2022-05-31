@@ -11,7 +11,7 @@ const BlockedWords = ({ blockedWords, setBlockedWords, word, setWord }) => {
     setBlockedWords(blockedWords.filter((w) => w !== word));
 
   return (
-    <>
+    <div className="my-6">
       <div className="px-6 py-3 mt-3 text-white rounded-t-2xl items-center bg-red-500">
         <header className="text-xl font-bold md:text-2xl">Blocked Words</header>
       </div>
@@ -28,7 +28,7 @@ const BlockedWords = ({ blockedWords, setBlockedWords, word, setWord }) => {
           No words currently blocked
         </div>
       )}
-    </>
+    </div>
   );
 };
 
