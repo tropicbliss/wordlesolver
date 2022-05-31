@@ -218,6 +218,7 @@ function App() {
           currentSelection={currentSelection}
           setCurrentSelection={setCurrentSelection}
           theme={theme}
+          state={state}
         />
       )}
       {stage !== "endPage" && (
@@ -239,7 +240,9 @@ function App() {
           setWord={setWord}
         />
       )}
-      {stage === "endPage" && <EndScreenGrid finalWord={result} />}
+      {stage === "endPage" && (
+        <EndScreenGrid finalWord={result} state={state} />
+      )}
       <ToastContainer theme={theme} hideProgressBar transition={Slide} />
     </>
   );
