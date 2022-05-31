@@ -86,7 +86,7 @@ function App() {
         "Successfully solved Wordle! Give this project a star on GitHub if you've enjoyed it",
         {
           isLoading: false,
-          autoClose: 5000,
+          autoClose: 1000,
           closeOnClick: true,
         }
       );
@@ -112,7 +112,7 @@ function App() {
           render: "Unable to find any words",
           type: "error",
           isLoading: false,
-          autoClose: 5000,
+          autoClose: 1000,
           closeOnClick: true,
         });
         setLoading(false);
@@ -131,7 +131,7 @@ function App() {
           render: "You should get this on your next one",
           type: "success",
           isLoading: false,
-          autoClose: 5000,
+          autoClose: 1000,
           closeOnClick: true,
         });
       } else {
@@ -139,7 +139,7 @@ function App() {
           render: `${data.count} words left`,
           type: "success",
           isLoading: false,
-          autoClose: 5000,
+          autoClose: 1000,
           closeOnClick: true,
         });
       }
