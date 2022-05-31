@@ -73,7 +73,7 @@ function App() {
       return;
     }
     if (!worker) {
-      toast.warn("The web worker has not started yet, please try again later");
+      toast.warn("The web worker has not started yet, please try again");
       return;
     }
     if (correctness.filter((c) => c === "correct").length === 5) {
@@ -218,7 +218,6 @@ function App() {
           currentSelection={currentSelection}
           setCurrentSelection={setCurrentSelection}
           theme={theme}
-          state={state}
         />
       )}
       {stage !== "endPage" && (
@@ -240,9 +239,7 @@ function App() {
           setWord={setWord}
         />
       )}
-      {stage === "endPage" && (
-        <EndScreenGrid finalWord={result} state={state} />
-      )}
+      {stage === "endPage" && <EndScreenGrid finalWord={result} />}
       <ToastContainer theme={theme} hideProgressBar transition={Slide} />
     </>
   );

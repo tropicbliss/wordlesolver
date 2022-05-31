@@ -1,7 +1,6 @@
 import React from "react";
 import CorrectnessPicker from "./CorrectnessPicker";
 import WordPad from "./WordPad";
-import History from "../History";
 
 const Editor = ({
   correctness,
@@ -10,7 +9,6 @@ const Editor = ({
   currentSelection,
   setCurrentSelection,
   theme,
-  state,
 }) => {
   function correctnessPickerClicked(c) {
     let newCorrectness = JSON.parse(JSON.stringify(correctness)); // deep copy
@@ -21,7 +19,6 @@ const Editor = ({
 
   return (
     <div className="my-6">
-      <History state={state} />
       <div className="flex flex-col space-y-3 items-center">
         <WordPad
           currentSelection={currentSelection}
