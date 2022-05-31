@@ -4,9 +4,17 @@ import Cell from "./Cell";
 const CorrectnessPicker = ({ onClick }) => {
   return (
     <div className="flex justify-center mb-1">
-      <Cell letter="" correctness={1} onClick={() => onClick(1)} />
-      <Cell letter="" correctness={2} onClick={() => onClick(2)} />
-      <Cell letter="" correctness={3} onClick={() => onClick(3)} />
+      {[...Array(3).keys()].map((i) => {
+        const idx = i + 1;
+        return (
+          <Cell
+            key={i}
+            letter=""
+            correctness={idx}
+            onClick={() => onClick(idx)}
+          />
+        );
+      })}
     </div>
   );
 };

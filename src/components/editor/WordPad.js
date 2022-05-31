@@ -11,12 +11,12 @@ const WordPad = ({
 }) => {
   return (
     <div className="flex justify-center mb-1">
-      {[...Array(5).keys()].map((idx) => (
+      {correctness.map((c, idx) => (
         <Cell
           key={idx}
           letter={word[idx]}
           isSelected={currentSelection === idx}
-          correctness={correctness[idx]}
+          correctness={c}
           onClick={() => setCurrentSelection(idx)}
           hasInfo={idx === 4}
           hasPointer={hasPointer}
