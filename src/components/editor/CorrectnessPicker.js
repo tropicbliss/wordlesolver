@@ -9,7 +9,7 @@ const CorrectnessPicker = ({ onClick }) => {
         return (
           <Cell
             key={i}
-            letter=""
+            letter={undefined}
             correctness={idx}
             onClick={() => onClick(idx)}
           />
