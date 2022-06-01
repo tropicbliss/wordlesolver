@@ -11,13 +11,38 @@ import BlockedWords from "./components/blockedwords/BlockedWords";
 import { Keyboard } from "./components/editor/Keyboard";
 
 function App() {
+  const [result, setResult] = useState("");
+  const [state, setState] = useState([]);
+  const { stage, changePageTo } = useContext(GlobalContext);
+  const [currentSelection, setCurrentSelection] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [worker, setWorker] = useState(null);
   const [blockedWords, setBlockedWords] = useState([]);
+  const [isNextJiggle, setNextJiggle] = useState(false);
+  const [word, setWord] = useState("");
+  const [correctness, setCorrectness] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
 
   useEffect(() => {
     const worker = new Worker(new URL("./workers/solver.js", import.meta.url));
     setWorker(worker);
   }, []);
+
+  useEffect(() => {
+    localStorage.theme = theme;
+    theme === "dark"
+      ? document.documentElement.classList.add("dark")
+      : document.documentElement.classList.remove("dark");
+  }, [theme]);
+
+  useEffect(() => {
+    localStorage.isHardMode = isHardMode;
+  }, [isHardMode]);
 
   const [theme, setTheme] = useState(
     localStorage.theme === "dark" ||
@@ -35,35 +60,9 @@ function App() {
     setMode(flag);
   };
 
-  useEffect(() => {
-    localStorage.theme = theme;
-    theme === "dark"
-      ? document.documentElement.classList.add("dark")
-      : document.documentElement.classList.remove("dark");
-  }, [theme]);
-
-  useEffect(() => {
-    localStorage.isHardMode = isHardMode;
-  }, [isHardMode]);
-
   const toggleTheme = () => {
     theme === "dark" ? setTheme("light") : setTheme("dark");
   };
-
-  const [word, setWord] = useState("");
-
-  const [correctness, setCorrectness] = useState([
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
-  const [result, setResult] = useState("");
-  const [state, setState] = useState([]);
-  const { stage, changePageTo } = useContext(GlobalContext);
-  const [currentSelection, setCurrentSelection] = useState(0);
-  const [loading, setLoading] = useState(false);
 
   const next = () => {
     const isValid = !correctness.includes(null) && result.length === 5;
@@ -170,8 +169,6 @@ function App() {
     setCurrentSelection(4);
   };
 
-  const [isNextJiggle, setNextJiggle] = useState(false);
-
   const onChar = (key) => {
     if (typeof key == "number") {
       correctnessPickerClicked(key);
@@ -200,20 +197,20 @@ function App() {
     }
   };
 
-  function correctnessPickerClicked(c) {
+  const correctnessPickerClicked = (c) => {
     let newCorrectness = JSON.parse(JSON.stringify(correctness)); // deep copy
     newCorrectness[currentSelection] = c;
     setCorrectness(newCorrectness);
     advanceSelectionRight();
-  }
+  };
 
-  function advanceSelectionRight() {
+  const advanceSelectionRight = () => {
     currentSelection !== 4 && setCurrentSelection(currentSelection + 1);
-  }
+  };
 
-  function advanceSelectionLeft() {
+  const advanceSelectionLeft = () => {
     currentSelection !== 0 && setCurrentSelection(currentSelection - 1);
-  }
+  };
 
   return (
     <>
