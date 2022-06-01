@@ -1,6 +1,6 @@
 {
-  "short_name": "Retrun",
-  "name": "Retrun Wordle Solver",
+  "short_name": "Wordle Solver",
+  "name": "Wordle Solver",
   "icons": [
     {
       "src": "favicon.ico",
