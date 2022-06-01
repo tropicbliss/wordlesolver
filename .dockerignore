@@ -1,0 +1,9 @@
+.dockerignore
+.git*
+.vscode/
+README.md
+LICENSE
+Dockerfile
+node_modules/
+wasm_lib/
+!wasm_lib/pkg
