@@ -2,6 +2,7 @@
 .git*
 .vscode/
 README.md
+build/
 LICENSE
 Dockerfile
 node_modules/
