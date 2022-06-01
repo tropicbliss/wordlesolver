@@ -33,13 +33,7 @@ docker run -d -p 8080:80 wsol:prod
 npm run build:wasm
 ```
 
-2. Build React project.
-
-```sh
-npm run build
-```
-
-Alternatively, you can run this project on `localhost`.
+2. Build React project and run the app on localhost.
 
 ```sh
 npm run start
