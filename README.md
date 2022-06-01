@@ -11,6 +11,22 @@ This project uses a similar algorithm that 3blue1brown uses.
 
 ## Build
 
+### Running in production with a Docker container
+
+1. Build image.
+
+```sh
+docker build -t wsol:prod .
+```
+
+2. Run container on port 8080.
+
+```sh
+docker run -d -p 8080:80 wsol:prod
+```
+
+### Running locally with a development build
+
 1. Build WASM module (optional as this WASM module is already included in this repo). Take note that [`wasm-pack`](https://github.com/rustwasm/wasm-pack) needs to be installed.
 
 ```sh
