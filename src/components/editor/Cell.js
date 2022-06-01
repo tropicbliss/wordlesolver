@@ -15,11 +15,9 @@ const Cell = ({
 }) => {
   const { stage } = useContext(GlobalContext);
   const classes = classnames(
-    "w-14 h-14 border-solid flex items-center justify-center mx-0.5 text-4xl font-bold rounded select-none relative transition-all dark:text-white",
+    "w-14 h-14 border-solid flex items-center justify-center mx-0.5 text-4xl font-bold rounded select-none relative transition-all border-2 dark:text-white",
     {
       "cursor-pointer": hasPointer,
-      "border-4": isSelected,
-      "border-2": !isSelected,
       "bg-white border-slate-200 dark:bg-slate-900 dark:border-slate-600":
         !correctness && !isSelected,
       "bg-white border-indigo-500 dark:bg-slate-900":

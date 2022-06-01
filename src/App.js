@@ -27,6 +27,16 @@ function App() {
     null,
     null,
   ]);
+  const [theme, setTheme] = useState(
+    localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ? "dark"
+      : "light"
+  );
+  const [isHardMode, setMode] = useState(
+    localStorage.isHardMode === "true" || false
+  );
 
   useEffect(() => {
     const worker = new Worker(new URL("./workers/solver.js", import.meta.url));
@@ -43,18 +53,6 @@ function App() {
   useEffect(() => {
     localStorage.isHardMode = isHardMode;
   }, [isHardMode]);
-
-  const [theme, setTheme] = useState(
-    localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ? "dark"
-      : "light"
-  );
-
-  const [isHardMode, setMode] = useState(
-    localStorage.isHardMode === "true" || false
-  );
 
   const toggleHardMode = (flag) => {
     setMode(flag);
