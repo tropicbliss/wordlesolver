@@ -1,7 +1,13 @@
 import React, { Key } from "./Key";
 import { useEffect } from "react";
 
-export const Keyboard = ({ onChar, onDelete, onEnter }) => {
+export const Keyboard = ({
+  onChar,
+  onDelete,
+  onEnter,
+  advanceSelectionRight,
+  advanceSelectionLeft,
+}) => {
   const onClick = (value) => {
     if (value === "ENTER") {
       onEnter();
@@ -18,6 +24,10 @@ export const Keyboard = ({ onChar, onDelete, onEnter }) => {
         onEnter();
       } else if (e.code === "Backspace") {
         onDelete();
+      } else if (e.code === "ArrowRight") {
+        advanceSelectionRight();
+      } else if (e.code === "ArrowLeft") {
+        advanceSelectionLeft();
       } else {
         const key = e.key;
         if (key.length === 1) {
@@ -34,7 +44,7 @@ export const Keyboard = ({ onChar, onDelete, onEnter }) => {
     return () => {
       window.removeEventListener("keyup", listener);
     };
-  }, [onEnter, onDelete, onChar]);
+  }, [onEnter, onDelete, onChar, advanceSelectionLeft, advanceSelectionRight]);
 
   return (
     <div className="mx-3 my-6">

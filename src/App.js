@@ -204,7 +204,15 @@ function App() {
     let newCorrectness = JSON.parse(JSON.stringify(correctness)); // deep copy
     newCorrectness[currentSelection] = c;
     setCorrectness(newCorrectness);
+    advanceSelectionRight();
+  }
+
+  function advanceSelectionRight() {
     currentSelection !== 4 && setCurrentSelection(currentSelection + 1);
+  }
+
+  function advanceSelectionLeft() {
+    currentSelection !== 0 && setCurrentSelection(currentSelection - 1);
   }
 
   return (
@@ -239,7 +247,13 @@ function App() {
         />
       )}
       {stage === "firstPage" && (
-        <Keyboard onChar={onChar} onEnter={onEnter} onDelete={onDelete} />
+        <Keyboard
+          onChar={onChar}
+          onEnter={onEnter}
+          onDelete={onDelete}
+          advanceSelectionLeft={advanceSelectionLeft}
+          advanceSelectionRight={advanceSelectionRight}
+        />
       )}
       {stage === "midPages" && (
         <BlockedWords
