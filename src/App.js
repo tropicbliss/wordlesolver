@@ -173,7 +173,9 @@ function App() {
   const [isNextJiggle, setNextJiggle] = useState(false);
 
   const onChar = (key) => {
-    if (result.length < 5) {
+    if (typeof key == "number") {
+      correctnessPickerClicked(key);
+    } else if (result.length < 5) {
       setResult(result + key.toLowerCase());
     }
   };
@@ -198,6 +200,13 @@ function App() {
     }
   };
 
+  function correctnessPickerClicked(c) {
+    let newCorrectness = JSON.parse(JSON.stringify(correctness)); // deep copy
+    newCorrectness[currentSelection] = c;
+    setCorrectness(newCorrectness);
+    currentSelection !== 4 && setCurrentSelection(currentSelection + 1);
+  }
+
   return (
     <>
       <Header
@@ -218,6 +227,7 @@ function App() {
           currentSelection={currentSelection}
           setCurrentSelection={setCurrentSelection}
           theme={theme}
+          correctnessPickerClicked={correctnessPickerClicked}
         />
       )}
       {stage !== "endPage" && (

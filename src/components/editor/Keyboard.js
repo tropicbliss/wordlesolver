@@ -20,8 +20,13 @@ export const Keyboard = ({ onChar, onDelete, onEnter }) => {
         onDelete();
       } else {
         const key = e.key;
-        if (key.length === 1 && key >= "a" && key <= "z") {
-          onChar(key);
+        if (key.length === 1) {
+          if (key >= "1" && key <= "3") {
+            onChar(+key);
+          }
+          if (key >= "a" && key <= "z") {
+            onChar(key);
+          }
         }
       }
     };
