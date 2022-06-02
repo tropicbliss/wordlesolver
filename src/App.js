@@ -83,7 +83,7 @@ function App() {
         "Successfully solved Wordle! Give this project a star on GitHub if you've enjoyed it",
         {
           isLoading: false,
-          autoClose: 1000,
+          autoClose: 3000,
           closeOnClick: true,
         }
       );
