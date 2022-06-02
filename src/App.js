@@ -241,7 +241,7 @@ function App() {
           isJiggle={isNextJiggle}
         />
       )}
-      {stage === "firstPage" && (
+      {stage !== "endPage" && (
         <Keyboard
           onChar={onChar}
           onEnter={onEnter}

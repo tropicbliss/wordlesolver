@@ -1,5 +1,6 @@
 import React, { Key } from "./Key";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../../context/GlobalState";
 
 export const Keyboard = ({
   onChar,
@@ -8,6 +9,8 @@ export const Keyboard = ({
   advanceSelectionRight,
   advanceSelectionLeft,
 }) => {
+  const { stage } = useContext(GlobalContext);
+
   const onClick = (value) => {
     if (value === "ENTER") {
       onEnter();
@@ -22,7 +25,7 @@ export const Keyboard = ({
     const listener = (e) => {
       if (e.code === "Enter") {
         onEnter();
-      } else if (e.code === "Backspace") {
+      } else if (e.code === "Backspace" && stage === "firstPage") {
         onDelete();
       } else if (e.code === "ArrowRight") {
         advanceSelectionRight();
@@ -34,7 +37,7 @@ export const Keyboard = ({
           if (key >= "1" && key <= "3") {
             onChar(+key);
           }
-          if (key >= "a" && key <= "z") {
+          if (key >= "a" && key <= "z" && stage === "firstPage") {
             onChar(key);
           }
         }
@@ -44,31 +47,40 @@ export const Keyboard = ({
     return () => {
       window.removeEventListener("keyup", listener);
     };
-  }, [onEnter, onDelete, onChar, advanceSelectionLeft, advanceSelectionRight]);
+  }, [
+    onEnter,
+    onDelete,
+    onChar,
+    advanceSelectionLeft,
+    advanceSelectionRight,
+    stage,
+  ]);
 
-  return (
-    <div className="mx-3 my-6">
-      <div className="flex justify-center mb-1">
-        {["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"].map((key) => (
-          <Key value={key} key={key} onClick={onClick} />
-        ))}
+  if (stage === "firstPage") {
+    return (
+      <div className="mx-3 my-6">
+        <div className="flex justify-center mb-1">
+          {["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"].map((key) => (
+            <Key value={key} key={key} onClick={onClick} />
+          ))}
+        </div>
+        <div className="flex justify-center mb-1">
+          {["A", "S", "D", "F", "G", "H", "J", "K", "L"].map((key) => (
+            <Key value={key} key={key} onClick={onClick} />
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <Key width={65.4} value="ENTER" onClick={onClick}>
+            Enter
+          </Key>
+          {["Z", "X", "C", "V", "B", "N", "M"].map((key) => (
+            <Key value={key} key={key} onClick={onClick} />
+          ))}
+          <Key width={65.4} value="DELETE" onClick={onClick}>
+            Delete
+          </Key>
+        </div>
       </div>
-      <div className="flex justify-center mb-1">
-        {["A", "S", "D", "F", "G", "H", "J", "K", "L"].map((key) => (
-          <Key value={key} key={key} onClick={onClick} />
-        ))}
-      </div>
-      <div className="flex justify-center">
-        <Key width={65.4} value="ENTER" onClick={onClick}>
-          Enter
-        </Key>
-        {["Z", "X", "C", "V", "B", "N", "M"].map((key) => (
-          <Key value={key} key={key} onClick={onClick} />
-        ))}
-        <Key width={65.4} value="DELETE" onClick={onClick}>
-          Delete
-        </Key>
-      </div>
-    </div>
-  );
+    );
+  }
 };
