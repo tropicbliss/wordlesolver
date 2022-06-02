@@ -1,6 +1,12 @@
 {
   "name": "wasm-lib",
+  "description": "Web Wordle solver Wasm library",
   "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tropicbliss/wordlesolver"
+  },
   "files": [
     "wasm_lib_bg.wasm",
     "wasm_lib.js",

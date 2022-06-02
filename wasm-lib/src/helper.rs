@@ -32,10 +32,7 @@ pub fn get_guesses(state: &str) -> Vec<Guess> {
     let guesses = state.split(',');
     guesses
         .into_iter()
-        .filter_map(|guess| {
-            if guess == "-----:00000" {
-                return None;
-            }
+        .map(|guess| {
             let mut guess_data = guess.split(':');
             let word = guess_data
                 .next()
@@ -55,7 +52,7 @@ pub fn get_guesses(state: &str) -> Vec<Guess> {
                 };
                 mask[idx] = correctness;
             }
-            Some(Guess { word, mask })
+            Guess { word, mask }
         })
         .collect()
 }

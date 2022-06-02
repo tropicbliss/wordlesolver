@@ -89,10 +89,6 @@ function App() {
       );
       return;
     }
-    if (state.length === 14) {
-      toast.warn("Only a maximum of 14 guesses are allowed");
-      return;
-    }
     const id = toast.loading("Processing...");
     setLoading(true);
     const currentPayloadUnit = result + ":" + correctness.join("");
