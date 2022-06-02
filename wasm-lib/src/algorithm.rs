@@ -32,7 +32,7 @@ impl Algorithm {
                 .into_iter()
                 .map(|(word, _)| word)
                 .filter(|word| !blocked.contains(&(**word).to_string()))
-                .map(|word| (word, sigmoid(WORDS.get(word).unwrap().0 as f64 / sum)))
+                .map(|word| (word, sigmoid(WORDS[word].0 as f64 / sum)))
                 .collect()
         } else {
             WORDS
@@ -43,7 +43,7 @@ impl Algorithm {
                         guess.matches(word) && !blocked.contains(&(**word).to_string())
                     })
                 })
-                .map(|word| (word, sigmoid(WORDS.get(word).unwrap().0 as f64 / sum)))
+                .map(|word| (word, sigmoid(WORDS[word].0 as f64 / sum)))
                 .collect()
         };
         let remaining: Vec<_> = if easy_mode {
@@ -55,10 +55,8 @@ impl Algorithm {
             consider.iter().collect()
         };
         let remaining_len = remaining.len();
-        let actual_remaining_len = remaining
-            .iter()
-            .filter(|(word, _)| WORDS.get(word).unwrap().1)
-            .count() as u16;
+        let actual_remaining_len =
+            remaining.iter().filter(|(word, _)| WORDS[word].1).count() as u16;
         if actual_remaining_len == 0 {
             return None;
         }
