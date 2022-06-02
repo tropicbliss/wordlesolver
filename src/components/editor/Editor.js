@@ -18,7 +18,6 @@ const Editor = ({
           setCurrentSelection={setCurrentSelection}
           word={word}
           correctness={correctness}
-          hasPointer={true}
           theme={theme}
         />
         <CorrectnessPicker onClick={correctnessPickerClicked} />

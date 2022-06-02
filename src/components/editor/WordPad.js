@@ -6,7 +6,6 @@ const WordPad = ({
   currentSelection,
   correctness,
   setCurrentSelection,
-  hasPointer,
   theme,
 }) => {
   return (
@@ -19,7 +18,6 @@ const WordPad = ({
           correctness={c}
           onClick={() => setCurrentSelection(idx)}
           hasInfo={idx === 4}
-          hasPointer={hasPointer}
           theme={theme}
         />
       ))}

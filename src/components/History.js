@@ -13,8 +13,7 @@ const History = ({ state }) => {
             word={data[0]}
             correctness={correctness}
             currentSelection={null}
-            setCurrentSelection={() => {}}
-            hasPointer={false}
+            setCurrentSelection={null}
           />
         );
       })}

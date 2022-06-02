@@ -14,8 +14,7 @@ const EndScreenGrid = ({ finalWord, state }) => {
         word={finalWord}
         correctness={[3, 3, 3, 3, 3]}
         currentSelection={null}
-        setCurrentSelection={() => {}}
-        hasPointer={false}
+        setCurrentSelection={null}
       />
       <Confetti width={width} height={height} recycle={false} />
     </div>
