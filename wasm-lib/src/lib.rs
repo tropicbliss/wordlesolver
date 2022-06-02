@@ -9,7 +9,7 @@ use wasm_bindgen::prelude::*;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[derive(Serialize, Deserialize)]
-struct Result {
+struct Outcome {
     guess: &'static str,
     count: usize,
 }
@@ -19,7 +19,7 @@ pub fn compute(state: &str, blocked: JsValue, hard_mode: bool) -> JsValue {
     let blocked: Vec<String> = blocked.into_serde().unwrap();
     let history = helper::get_guesses(state);
     let data = algorithm::Algorithm::guess(&history, &blocked, !hard_mode);
-    let result = data.map(|r| Result {
+    let result = data.map(|r| Outcome {
         guess: r.guess,
         count: r.count,
     });
