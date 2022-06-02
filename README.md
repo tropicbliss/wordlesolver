@@ -1,6 +1,6 @@
 # Wordle Solver
 
-This is my first major frontend project created using React/Tailwind/WebAssembly. Apologies for any spaghetti code and my poor frontend design skills.
+This is my first major frontend project created using React/Tailwind/WebAssembly.
 
 This project uses a similar algorithm that 3blue1brown uses.
 
