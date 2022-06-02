@@ -262,3 +262,5 @@ function App() {
 }
 
 export default App;
+
+// The code is spaghetti and meatballs :P
