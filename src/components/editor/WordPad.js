@@ -16,7 +16,9 @@ const WordPad = ({
           letter={word[idx]}
           isSelected={currentSelection === idx}
           correctness={c}
-          onClick={() => setCurrentSelection(idx)}
+          onClick={
+            setCurrentSelection === null ? null : () => setCurrentSelection(idx)
+          }
           hasInfo={idx === 4}
           theme={theme}
         />
