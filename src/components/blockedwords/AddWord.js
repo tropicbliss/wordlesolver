@@ -25,6 +25,9 @@ const AddWord = ({ onAdd, blockedWords, word, setWord }) => {
     <form
       className="text-white py-3 pl-3 pr-6 text-lg md:text-xl flex justify-between space-x-3 items-center"
       onSubmit={onSubmit}
+      onKeyDown={(e) => {
+        e.key === "Enter" && e.preventDefault();
+      }} 
     >
       <input
         className="min-w-0 rounded-md border border-gray-300 px-3 py-2 text-gray-900 dark:text-white dark:bg-slate-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
