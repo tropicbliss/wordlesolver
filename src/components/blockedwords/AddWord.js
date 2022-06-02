@@ -6,16 +6,9 @@ const AddWord = ({ onAdd, blockedWords, word, setWord }) => {
     e.preventDefault();
     const lowercaseWord = word.toLowerCase();
     const isValid =
-      /^^[a-z]{5}$/.test(lowercaseWord) && lowercaseWord !== "tares";
+      /^^[a-z]{5}$/.test(lowercaseWord);
     if (!isValid) {
       toast.warn("Please submit a valid word");
-      setWord("");
-      return;
-    }
-    if (blockedWords.length === 27) {
-      toast.warn(
-        "We've reached the maximum number of words allowed in the blocked words list"
-      );
       setWord("");
       return;
     }
