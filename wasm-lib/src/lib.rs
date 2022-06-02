@@ -1,6 +1,5 @@
 mod algorithm;
 mod helper;
-mod utils;
 
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
