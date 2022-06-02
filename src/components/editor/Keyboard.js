@@ -8,6 +8,7 @@ export const Keyboard = ({
   onEnter,
   advanceSelectionRight,
   advanceSelectionLeft,
+  home,
 }) => {
   const { stage } = useContext(GlobalContext);
 
@@ -23,15 +24,17 @@ export const Keyboard = ({
 
   useEffect(() => {
     const listener = (e) => {
-      if (e.code === "Enter") {
+      if (e.code === "Enter" && stage !== "endPage") {
         onEnter();
       } else if (e.code === "Backspace" && stage === "firstPage") {
         onDelete();
-      } else if (e.code === "ArrowRight") {
+      } else if (e.code === "ArrowRight" && stage !== "endPage") {
         advanceSelectionRight();
-      } else if (e.code === "ArrowLeft") {
+      } else if (e.code === "ArrowLeft" && stage !== "endPage") {
         advanceSelectionLeft();
-      } else {
+      } else if (e.code === "Escape" && stage !== "firstPage") {
+        home();
+      } else if (stage !== "endPage") {
         const key = e.key;
         if (key.length === 1) {
           if (key >= "1" && key <= "3") {
@@ -54,6 +57,7 @@ export const Keyboard = ({
     advanceSelectionLeft,
     advanceSelectionRight,
     stage,
+    home,
   ]);
 
   if (stage === "firstPage") {

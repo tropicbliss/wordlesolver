@@ -237,15 +237,14 @@ function App() {
           isJiggle={isNextJiggle}
         />
       )}
-      {stage !== "endPage" && (
-        <Keyboard
-          onChar={onChar}
-          onEnter={onEnter}
-          onDelete={onDelete}
-          advanceSelectionLeft={advanceSelectionLeft}
-          advanceSelectionRight={advanceSelectionRight}
-        />
-      )}
+      <Keyboard
+        onChar={onChar}
+        onEnter={onEnter}
+        onDelete={onDelete}
+        advanceSelectionLeft={advanceSelectionLeft}
+        advanceSelectionRight={advanceSelectionRight}
+        home={home}
+      />
       {stage === "midPages" && (
         <BlockedWords
           blockedWords={blockedWords}
