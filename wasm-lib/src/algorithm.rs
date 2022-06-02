@@ -21,7 +21,7 @@ fn est_steps_left(entropy: f64) -> f64 {
 
 pub struct Algorithm {
     pub guess: &'static str,
-    pub count: usize,
+    pub count: u16,
 }
 
 impl Algorithm {
@@ -58,7 +58,7 @@ impl Algorithm {
         let actual_remaining_len = remaining
             .iter()
             .filter(|(word, _)| WORDS.get(word).unwrap().1)
-            .count();
+            .count() as u16;
         if actual_remaining_len == 0 {
             return None;
         }

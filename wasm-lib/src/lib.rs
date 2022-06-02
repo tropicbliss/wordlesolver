@@ -11,7 +11,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 #[derive(Serialize, Deserialize)]
 struct Result {
     guess: &'static str,
-    count: usize,
+    count: u16,
 }
 
 #[wasm_bindgen]
