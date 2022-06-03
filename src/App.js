@@ -7,7 +7,6 @@ import BottomNavigation from "./components/navigation/BottomNavigation";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EndScreenGrid from "./components/EndScreenGrid";
-import BlockedWords from "./components/blockedwords/BlockedWords";
 import { Keyboard } from "./components/editor/Keyboard";
 
 function App() {
@@ -17,9 +16,7 @@ function App() {
   const [currentSelection, setCurrentSelection] = useState(0);
   const [loading, setLoading] = useState(false);
   const [worker, setWorker] = useState(null);
-  const [blockedWords, setBlockedWords] = useState([]);
   const [isNextJiggle, setNextJiggle] = useState(false);
-  const [word, setWord] = useState("");
   const [correctness, setCorrectness] = useState([
     null,
     null,
@@ -80,61 +77,31 @@ function App() {
     if (correctness.filter((c) => c === 3).length === 5) {
       changePageTo("endPage");
       toast.success(
-        "Successfully solved Wordle! Give this project a star on GitHub if you've enjoyed it",
-        {
-          isLoading: false,
-          autoClose: 1000,
-          closeOnClick: true,
-        }
+        "Successfully solved Wordle! Give this project a star on GitHub if you've enjoyed it"
       );
       return;
     }
-    const id = toast.loading("Processing...");
     setLoading(true);
     const currentPayloadUnit = result + ":" + correctness.join("");
     const currentPayload = [...state, currentPayloadUnit].join(",");
     worker.postMessage({
       state: currentPayload,
-      blocked: blockedWords,
       isHardMode,
     });
     worker.onmessage = (e) => {
       const data = e.data;
       if (data === null) {
-        toast.update(id, {
-          render: "Unable to find any words",
-          type: "error",
-          isLoading: false,
-          autoClose: 1000,
-          closeOnClick: true,
-        });
+        toast.warn("Unable to find any words");
         setLoading(false);
         setCurrentSelection(0);
         return;
       }
-      setResult(data.guess);
+      setResult(data);
       setState([...state, currentPayloadUnit]);
       setCorrectness([null, null, null, null, null]);
       setCurrentSelection(0);
       if (stage === "firstPage") {
         changePageTo("midPages");
-      }
-      if (data.count === 1) {
-        toast.update(id, {
-          render: "You should get this on your next one",
-          type: "success",
-          isLoading: false,
-          autoClose: 1000,
-          closeOnClick: true,
-        });
-      } else {
-        toast.update(id, {
-          render: `${data.count} words left`,
-          type: "success",
-          isLoading: false,
-          autoClose: 1000,
-          closeOnClick: true,
-        });
       }
       setLoading(false);
     };
@@ -227,6 +194,7 @@ function App() {
           setCurrentSelection={setCurrentSelection}
           theme={theme}
           correctnessPickerClicked={correctnessPickerClicked}
+          state={state}
         />
       )}
       {stage !== "endPage" && (
@@ -245,14 +213,6 @@ function App() {
         advanceSelectionRight={advanceSelectionRight}
         home={home}
       />
-      {stage === "midPages" && (
-        <BlockedWords
-          blockedWords={blockedWords}
-          setBlockedWords={setBlockedWords}
-          word={word}
-          setWord={setWord}
-        />
-      )}
       {stage === "endPage" && (
         <EndScreenGrid finalWord={result} state={state} />
       )}

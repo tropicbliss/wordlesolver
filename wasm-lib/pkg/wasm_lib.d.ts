@@ -2,17 +2,16 @@
 /* eslint-disable */
 /**
 * @param {string} state
-* @param {any} blocked
 * @param {boolean} hard_mode
 * @returns {any}
 */
-export function compute(state: string, blocked: any, hard_mode: boolean): any;
+export function compute(state: string, hard_mode: boolean): any;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly compute: (a: number, b: number, c: number, d: number) => number;
+  readonly compute: (a: number, b: number, c: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
 }
