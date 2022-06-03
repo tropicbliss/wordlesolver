@@ -7,7 +7,7 @@ const Header = ({ onToggleDarkMode, theme, home, previous, isLoading }) => {
   const { stage } = useContext(GlobalContext);
 
   return (
-    <header className="flex justify-between px-3 py-3 text-white text-xl bg-slate-900 dark:border-b dark:border-gray-600 space-x-3 md:text-2xl">
+    <header className="flex justify-between px-3 py-3 text-white text-xl bg-slate-900 border-b border-white dark:border-gray-600 space-x-3 md:text-2xl">
       <div className="select-none flex items-center space-x-3">
         <GiBrain className="text-orange-200" />
         <h3 className="font-bold">Wordle Solver</h3>
