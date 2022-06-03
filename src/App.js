@@ -230,7 +230,13 @@ function App() {
       {stage === "endPage" && (
         <EndScreenGrid finalWord={result} state={state} />
       )}
-      <ToastContainer theme={theme} hideProgressBar transition={Slide} />
+      <ToastContainer
+        theme={theme}
+        hideProgressBar
+        transition={Slide}
+        autoClose={1000}
+        closeOnClick
+      />
     </>
   );
 }
