@@ -77,7 +77,11 @@ function App() {
     if (correctness.filter((c) => c === 3).length === 5) {
       changePageTo("endPage");
       toast.success(
-        "Successfully solved Wordle! Give this project a star on GitHub if you've enjoyed it"
+        "Successfully solved Wordle! Give this project a star on GitHub if you've enjoyed it",
+        {
+          autoClose: 1000,
+          closeOnClick: true,
+        }
       );
       return;
     }
@@ -230,13 +234,7 @@ function App() {
       {stage === "endPage" && (
         <EndScreenGrid finalWord={result} state={state} />
       )}
-      <ToastContainer
-        theme={theme}
-        hideProgressBar
-        transition={Slide}
-        autoClose={1000}
-        closeOnClick
-      />
+      <ToastContainer theme={theme} hideProgressBar transition={Slide} />
     </>
   );
 }
