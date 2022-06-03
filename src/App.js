@@ -81,6 +81,7 @@ function App() {
       );
       return;
     }
+    const id = toast.loading("Processing...");
     setLoading(true);
     const currentPayloadUnit = result + ":" + correctness.join("");
     const currentPayload = [...state, currentPayloadUnit].join(",");
@@ -91,7 +92,13 @@ function App() {
     worker.onmessage = (e) => {
       const data = e.data;
       if (data === null) {
-        toast.warn("Unable to find any words");
+        toast.update(id, {
+          render: "Unable to find any words",
+          type: "warning",
+          isLoading: false,
+          autoClose: 1000,
+          closeOnClick: true,
+        });
         setLoading(false);
         setCurrentSelection(0);
         return;
@@ -103,6 +110,13 @@ function App() {
       if (stage === "firstPage") {
         changePageTo("midPages");
       }
+      toast.update(id, {
+        render: "Success!",
+        type: "success",
+        isLoading: false,
+        autoClose: 1000,
+        closeOnClick: true,
+      });
       setLoading(false);
     };
   };
