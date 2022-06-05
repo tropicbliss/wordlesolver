@@ -192,7 +192,7 @@ function App() {
   };
 
   return (
-    <div className="dark:bg-slate-900">
+    <>
       <Header
         onToggleDarkMode={toggleTheme}
         theme={theme}
@@ -235,7 +235,7 @@ function App() {
         <EndScreenGrid finalWord={result} state={state} />
       )}
       <ToastContainer theme={theme} hideProgressBar transition={Slide} />
-    </div>
+    </>
   );
 }
 
