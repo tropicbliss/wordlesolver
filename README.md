@@ -27,7 +27,7 @@ docker run -d -p 8080:80 wsol:prod
 
 ### Running locally with a development build
 
-1. Build Wasm module (optional as the Wasm module is already included in the repo). Take note that [Rust](https://rustup.rs/), the `wasm32-unknown-unknown` target (installed via rustup), and [`wasm-pack`](https://github.com/rustwasm/wasm-pack/) needs to be installed.
+1. Build Wasm module (optional as the Wasm module is already included in the repo). Take note that [Rust](https://rustup.rs/) and [`wasm-pack`](https://github.com/rustwasm/wasm-pack/) needs to be installed.
 
 ```sh
 npm run build:wasm
