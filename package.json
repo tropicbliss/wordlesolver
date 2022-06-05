@@ -1,7 +1,7 @@
 {
   "name": "wsol",
   "version": "0.1.0",
-  "description": "Wordle solver",
+  "description": "An easy to use, online Wordle solver that supports both hard and easy mode.",
   "author": "tropicbliss",
   "license": "MIT",
   "private": true,
