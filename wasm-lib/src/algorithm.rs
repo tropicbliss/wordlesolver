@@ -43,6 +43,9 @@ pub fn guess(history: &[Guess], easy_mode: bool) -> Option<&'static str> {
     } else {
         consider.iter().collect()
     };
+    if remaining.is_empty() {
+        return None;
+    }
     let remaining_len = remaining.len();
     if remaining_len == 1 {
         return Some(remaining.first().unwrap().0);
