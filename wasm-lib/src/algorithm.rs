@@ -20,19 +20,19 @@ fn est_steps_left(entropy: f64) -> f64 {
 }
 
 pub fn guess(history: &[Guess], easy_mode: bool) -> Option<&'static str> {
-    let sum: f64 = WORDS.into_iter().map(|(_, count)| *count as f64).sum();
+    let sum: f64 = WORDS.into_iter().map(|(_, (count, _))| *count as f64).sum();
     let consider: Vec<_> = if easy_mode {
         WORDS
             .into_iter()
             .map(|(word, _)| word)
-            .map(|word| (word, sigmoid(WORDS[word] as f64 / sum)))
+            .map(|word| (word, sigmoid(WORDS[word].0 as f64 / sum)))
             .collect()
     } else {
         WORDS
             .into_iter()
             .map(|(word, _)| word)
             .filter(|word| history.iter().all(|guess| guess.matches(word)))
-            .map(|word| (word, sigmoid(WORDS[word] as f64 / sum)))
+            .map(|word| (word, sigmoid(WORDS[word].0 as f64 / sum)))
             .collect()
     };
     let remaining: Vec<_> = if easy_mode {
@@ -44,7 +44,11 @@ pub fn guess(history: &[Guess], easy_mode: bool) -> Option<&'static str> {
         consider.iter().collect()
     };
     let remaining_len = remaining.len();
-    if remaining_len == 1 {
+    let actual_remaining_len = remaining.iter().filter(|(word, _)| WORDS[word].1).count();
+    if actual_remaining_len == 0 {
+        return None;
+    }
+    if actual_remaining_len == 1 {
         return Some(remaining.first().unwrap().0);
     }
     let score = history.len() as f64;
