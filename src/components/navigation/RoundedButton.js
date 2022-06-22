@@ -1,25 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
+import classnames from "classnames";
 
 const RoundedButton = ({ text, onClick, isShake, disabled }) => {
-  return (
-    <Button
-      className={isShake ? "jiggle" : ""}
-      color="neutral"
-      size="large"
-      onClick={onClick}
-      disabled={disabled}
-      variant="contained"
-    >
-      {text}
-    </Button>
+  const classes = classnames(
+    "inline-flex justify-center items-center text-center mt-2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-600 focus:outline-none sm:text-sm",
+    {
+      jiggle: isShake,
+    }
   );
-};
 
-RoundedButton.propTypes = {
-  text: PropTypes.string,
-  onClick: PropTypes.func,
+  return (
+    <button className={classes} onClick={onClick} disabled={disabled}>
+      {text}
+    </button>
+  );
 };
 
 export default RoundedButton;
