@@ -8,6 +8,8 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EndScreenGrid from "./components/EndScreenGrid";
 import { Keyboard } from "./components/editor/Keyboard";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@mui/system";
 
 function App() {
   const [result, setResult] = useState("");
@@ -191,8 +193,17 @@ function App() {
     currentSelection !== 0 && setCurrentSelection(currentSelection - 1);
   };
 
+  const muiTheme = createTheme({
+    palette: {
+      neutral: {
+        main: "#6366f1",
+        contrastText: "#ffffff",
+      },
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={muiTheme}>
       <Header
         onToggleDarkMode={toggleTheme}
         theme={theme}
@@ -235,7 +246,7 @@ function App() {
         <EndScreenGrid finalWord={result} state={state} />
       )}
       <ToastContainer theme={theme} hideProgressBar transition={Slide} />
-    </>
+    </ThemeProvider>
   );
 }
 
