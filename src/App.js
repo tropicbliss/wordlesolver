@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState }, React from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import { GlobalContext } from "./context/GlobalState";
 import HardModeSwitch from "./components/hardmode/HardModeSwitch";
@@ -8,6 +8,7 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EndScreenGrid from "./components/EndScreenGrid";
 import { Keyboard } from "./components/editor/Keyboard";
+import React from "react";
 
 function App() {
   const [result, setResult] = useState("");
