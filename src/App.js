@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, React } from "react";
+import { useContext, useEffect, useState }, React from "react";
 import Header from "./components/Header";
 import { GlobalContext } from "./context/GlobalState";
 import HardModeSwitch from "./components/hardmode/HardModeSwitch";
