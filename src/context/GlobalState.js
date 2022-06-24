@@ -1,5 +1,6 @@
 import { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
+import React from "react";
 
 const initialState = {
   stage: "firstPage",
