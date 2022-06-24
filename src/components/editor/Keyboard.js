@@ -1,6 +1,7 @@
-import React, { Key } from "./Key";
+import { Key } from "./Key";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../context/GlobalState";
+import React from "react";
 
 export const Keyboard = ({
   onChar,
