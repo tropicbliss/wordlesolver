@@ -38,7 +38,10 @@ function App() {
 
   useEffect(() => {
     const worker = new Worker(new URL("./workers/solver.js", import.meta.url));
-    setWorker(worker);
+    worker.postMessage(null);
+    worker.onmessage = (_) => {
+      setWorker(worker);
+    };
   }, []);
 
   useEffect(() => {
