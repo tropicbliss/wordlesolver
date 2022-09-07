@@ -1,5 +1,6 @@
 mod algorithm;
 mod helper;
+mod utils;
 
 use wasm_bindgen::prelude::*;
 

@@ -6,20 +6,20 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^14.4.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "classnames": "^2.3.1",
     "react": "^18.2.0",
     "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-scripts": "5.0.1",
-    "react-toastify": "^9.0.7",
+    "react-toastify": "^9.0.8",
     "react-tooltip": "^4.2.21",
     "react-use": "^17.4.0",
     "wasm-lib": "file:wasm-lib/pkg",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.7"
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
   }
 }
