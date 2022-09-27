@@ -5,7 +5,8 @@ const cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: tru
 
 cachedTextDecoder.decode();
 
-let cachedUint8Memory0;
+let cachedUint8Memory0 = new Uint8Array();
+
 function getUint8Memory0() {
     if (cachedUint8Memory0.byteLength === 0) {
         cachedUint8Memory0 = new Uint8Array(wasm.memory.buffer);
@@ -161,18 +162,21 @@ function initMemory(imports, maybe_memory) {
 function finalizeInit(instance, module) {
     wasm = instance.exports;
     init.__wbindgen_wasm_module = module;
-    cachedUint8Memory0 = new Uint8Array(wasm.memory.buffer);
+    cachedUint8Memory0 = new Uint8Array();
 
 
     return wasm;
 }
 
-function initSync(bytes) {
+function initSync(module) {
     const imports = getImports();
 
     initMemory(imports);
 
-    const module = new WebAssembly.Module(bytes);
+    if (!(module instanceof WebAssembly.Module)) {
+        module = new WebAssembly.Module(module);
+    }
+
     const instance = new WebAssembly.Instance(module, imports);
 
     return finalizeInit(instance, module);
