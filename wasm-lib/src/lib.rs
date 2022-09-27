@@ -12,5 +12,5 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 pub fn compute(state: &str, hard_mode: bool) -> JsValue {
     let history = helper::get_guesses(state);
     let data = algorithm::guess(&history, !hard_mode);
-    JsValue::from_serde(&data).unwrap()
+    serde_wasm_bindgen::to_value(&data).unwrap()
 }
