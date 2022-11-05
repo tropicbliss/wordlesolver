@@ -99,7 +99,7 @@ function App() {
     });
     worker.onmessage = (e) => {
       const data = e.data;
-      if (data === null) {
+      if (data === undefined) {
         toast.update(id, {
           render: "Unable to find any words",
           type: "warning",
