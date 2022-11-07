@@ -7,6 +7,8 @@ const DICTIONARY: &str = include_str!("dictionary.txt");
 const ANSWERS: &str = include_str!("answers.txt");
 
 fn main() {
+    println!("cargo:rerun-if-changed=dictionary.txt");
+    println!("cargo:rerun-if-changed=answers.txt");
     let mut words = Vec::from_iter(DICTIONARY.lines().map(|line| {
         line.split_once(' ')
             .expect("every line is word + space + frequency")
