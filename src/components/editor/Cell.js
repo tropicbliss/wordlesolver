@@ -54,10 +54,11 @@ const Cell = ({ letter, isSelected, correctness, onClick, hasInfo, theme }) => {
         <div>{letter === undefined ? "" : letter.toUpperCase()}</div>
         {stage === "firstPage" && hasInfo && (
           <>
-            <ReactTooltip type={theme} />
+            <ReactTooltip variant={theme} anchorId="tooltip" />
             <FcInfo
-              data-tip="If this takes a long time to process, try starting with the word 'tares'"
+              data-tooltip-content="If this takes a long time to process, try starting with the word 'tares'"
               className="text-2xl absolute -right-3 -top-3"
+              id="tooltip"
             />
           </>
         )}
