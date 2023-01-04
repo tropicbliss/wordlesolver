@@ -214,7 +214,6 @@ function App() {
           word={result}
           currentSelection={currentSelection}
           setCurrentSelection={setCurrentSelection}
-          theme={theme}
           correctnessPickerClicked={correctnessPickerClicked}
           state={state}
         />

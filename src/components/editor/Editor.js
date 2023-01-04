@@ -9,7 +9,6 @@ const Editor = ({
   word,
   currentSelection,
   setCurrentSelection,
-  theme,
   state,
 }) => {
   return (
@@ -22,7 +21,6 @@ const Editor = ({
             setCurrentSelection={setCurrentSelection}
             word={word}
             correctness={correctness}
-            theme={theme}
           />
         </div>
         <CorrectnessPicker onClick={correctnessPickerClicked} />

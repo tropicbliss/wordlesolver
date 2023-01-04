@@ -6,7 +6,6 @@ const WordPad = ({
   currentSelection,
   correctness,
   setCurrentSelection,
-  theme,
 }) => {
   return (
     <div className="flex justify-center mb-1">
@@ -19,8 +18,6 @@ const WordPad = ({
           onClick={
             setCurrentSelection === null ? null : () => setCurrentSelection(idx)
           }
-          hasInfo={idx === 4}
-          theme={theme}
         />
       ))}
     </div>

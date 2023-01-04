@@ -1,11 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import classnames from "classnames";
-import { FcInfo } from "react-icons/fc";
-import { Tooltip as ReactTooltip } from "react-tooltip";
-import { GlobalContext } from "../../context/GlobalState";
 
-const Cell = ({ letter, isSelected, correctness, onClick, hasInfo, theme }) => {
-  const { stage } = useContext(GlobalContext);
+const Cell = ({ letter, isSelected, correctness, onClick }) => {
   const classes = classnames(
     "w-14 h-14 border-solid flex items-center justify-center mx-0.5 text-4xl font-bold rounded select-none relative transition-color duration-150 ease-out border-2 dark:text-white",
     {
@@ -36,32 +32,12 @@ const Cell = ({ letter, isSelected, correctness, onClick, hasInfo, theme }) => {
     return (
       <div className={classes} onClick={() => onClick()}>
         <div>{letter === undefined ? "" : letter.toUpperCase()}</div>
-        {stage === "firstPage" && hasInfo && (
-          <>
-            <ReactTooltip variant={theme} anchorId="tooltip" />
-            <FcInfo
-              data-tooltip-content="If this takes a long time to process, try starting with the word 'tares'"
-              className="text-2xl absolute -right-3 -top-3"
-              id="tooltip"
-            />
-          </>
-        )}
       </div>
     );
   } else {
     return (
       <div className={classes}>
         <div>{letter === undefined ? "" : letter.toUpperCase()}</div>
-        {stage === "firstPage" && hasInfo && (
-          <>
-            <ReactTooltip variant={theme} anchorId="tooltip" />
-            <FcInfo
-              data-tooltip-content="If this takes a long time to process, try starting with the word 'tares'"
-              className="text-2xl absolute -right-3 -top-3"
-              id="tooltip"
-            />
-          </>
-        )}
       </div>
     );
   }
